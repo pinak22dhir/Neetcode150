@@ -1,0 +1,34 @@
+class Solution {
+   static class Pair{
+      int fi;
+      int si;
+      public Pair(int a,int b){
+        this.fi=a;
+        this.si=b;
+      }
+    }
+    //mpst frequent jo b
+    public int[] topKFrequent(int[] nums, int k) {
+        int arr[]=new int[k];
+        Map<Integer,Integer> mi=new HashMap<>();
+       for(int i=0;i<nums.length;i++){
+        mi.put(nums[i],mi.getOrDefault(nums[i],0)+1);
+       } 
+       PriorityQueue<Pair> pq=new PriorityQueue<>((a,b)->
+        Integer.compare(a.si,b.si));
+      
+    for(Map.Entry<Integer,Integer> en:mi.entrySet()){
+        pq.add(new Pair(en.getKey(),en.getValue()));
+         while(pq.size()>k){
+            pq.poll();
+        }
+    } int z=0;
+      
+       while(!pq.isEmpty()){
+       Pair a=pq.peek();
+        arr[z++]=a.fi;
+         pq.poll();
+       }
+   return arr;
+    }
+}
